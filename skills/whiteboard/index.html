@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器导航</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #0a0a0a; }
+        .card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <nav class="border-b border-zinc-800 bg-zinc-900/50 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-white">🖥️ 服务器导航</h1>
+            <button onclick="logout()" class="text-zinc-400 hover:text-white">退出登录</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <p class="text-zinc-400 mb-8">已对外可访问的服务列表</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="services">
+            <!-- Services will be loaded here -->
+        </div>
+        
+        <!-- Add New Service Form -->
+        <div class="mt-12 p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+            <h2 class="text-lg font-semibold text-white mb-4">➕ 添加新服务</h2>
+            <form id="addForm" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" id="serviceName" placeholder="服务名称" class="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white" required>
+                <input type="text" id="serviceUrl" placeholder="URL 路径 (如 /dashboard)" class="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white" required>
+                <input type="text" id="serviceDesc" placeholder="描述" class="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white">
+                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg">添加</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Check auth
+        const token = localStorage.getItem('token');
+        if (!token) window.location.href = '/login.html';
+
+        // Load services
+        async function loadServices() {
+            const res = await fetch('/api/services', {
+                headers: {'Authorization': 'Bearer ' + token}
+            });
+            const services = await res.json();
+            
+            document.getElementById('services').innerHTML = services.map(s => `
+                <a href="${s.url}" target="_blank" class="card block p-6 bg-zinc-900 rounded-2xl border border-zinc-800 transition hover:border-zinc-700">
+                    <h3 class="text-lg font-semibold text-white mb-2">${s.name}</h3>
+                    <p class="text-zinc-400 text-sm mb-3">${s.description || ''}</p>
+                    <span class="text-blue-400 text-sm">${s.url}</span>
+                </a>
+            `).join('');
+        }
+
+        // Add service
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('serviceName').value;
+            const url = document.getElementById('serviceUrl').value;
+            const description = document.getElementById('serviceDesc').value;
+            
+            await fetch('/api/services', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({name, url, description})
+            });
+            
+            document.getElementById('addForm').reset();
+            loadServices();
+        });
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/login.html';
+        }
+
+        loadServices();
+    </script>
+</body>
+</html>

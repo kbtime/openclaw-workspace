@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "readx": {
+      "source": "readx/cc",
+      "sourceType": "well-known",
+      "computedHash": "cefd968951e504790c6cafd59557e7023ed2e3e4fdd8a21a4da5553691b8d4a3"
+    }
+  }
+}

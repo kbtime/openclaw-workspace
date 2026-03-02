@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Usecases Gallery | AI Agent 使用案例集锦</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .badge-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Filter Tabs */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px 20px;
+            flex-wrap: wrap;
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .filter-btn {
+            padding: 10px 24px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Gallery Grid */
+        .gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Usecase Card */
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .card-header {
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .card-content {
+            flex: 1;
+        }
+        
+        .card-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .card-body {
+            padding: 16px 24px 24px;
+        }
+        
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            padding: 4px 12px;
+            background: var(--bg-hover);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        
+        .tag.skill {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-card);
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--primary);
+        }
+        
+        .modal-header {
+            padding: 40px 40px 0;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .modal-body {
+            padding: 24px 40px 40px;
+        }
+        
+        .modal-section {
+            margin-bottom: 28px;
+        }
+        
+        .modal-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        
+        .modal-section p, .modal-section li {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        .modal-section ul {
+            padding-left: 20px;
+        }
+        
+        .modal-section li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: var(--text);
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Category Colors */
+        .cat-content { --cat-color: #ec4899; background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); }
+        .cat-productivity { --cat-color: #3b82f6; background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
+        .cat-personal { --cat-color: #10b981; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); }
+        .cat-analysis { --cat-color: #f59e0b; background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); }
+        .cat-automation { --cat-color: #8b5cf6; background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%); }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .card:nth-child(1) { animation-delay: 0.05s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.15s; }
+        .card:nth-child(4) { animation-delay: 0.2s; }
+        .card:nth-child(5) { animation-delay: 0.25s; }
+        .card:nth-child(6) { animation-delay: 0.3s; }
+        .card:nth-child(7) { animation-delay: 0.35s; }
+        .card:nth-child(8) { animation-delay: 0.4s; }
+        .card:nth-child(9) { animation-delay: 0.45s; }
+        .card:nth-child(10) { animation-delay: 0.5s; }
+        .card:nth-child(11) { animation-delay: 0.55s; }
+        .card:nth-child(12) { animation-delay: 0.6s; }
+        .card:nth-child(13) { animation-delay: 0.65s; }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🤖 OpenClaw Usecases Gallery</h1>
+            <p>AI Agent 使用案例集锦 — 13 个实用工作流，从内容创作到个人管理，打造你的数字助理</p>
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                <span>13 个精选案例 • 持续更新</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="content">内容创作</button>
+        <button class="filter-btn" data-filter="productivity">生产力</button>
+        <button class="filter-btn" data-filter="personal">个人管理</button>
+        <button class="filter-btn" data-filter="analysis">数据分析</button>
+        <button class="filter-btn" data-filter="automation">自动化</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery" id="gallery">
+        <!-- Cards will be inserted by JavaScript -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header">
+                <div class="modal-icon" id="modal-icon"></div>
+                <div>
+                    <div class="card-category" id="modal-category"></div>
+                    <h2 class="card-title" id="modal-title"></h2>
+                </div>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>原始仓库: <a href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank">awesome-openclaw-usecases</a></p>
+        <p style="margin-top: 8px;">由 OpenClaw AI Agent 自动构建</p>
+    </footer>
+
+    <script>
+        // Usecases Data
+        const usecases = [
+            {
+                id: 1,
+                title: "Daily YouTube Digest",
+                category: "content",
+                categoryName: "内容创作",
+                icon: "📺",
+                color: "cat-content",
+                desc: "每日 YouTube 视频摘要，从你关注的频道获取最新内容并生成关键洞察。",
+                skills: ["youtube-full"],
+                painPoint: "YouTube 通知不可靠，订阅的视频经常被算法埋没。",
+                whatItDoes: [
+                    "从你喜欢的频道列表获取最新视频",
+                    "总结每个视频的关键要点",
+                    "每日推送摘要给你"
+                ],
+                setup: `安装 youtube-full skill:
+"Install the youtube-full skill and set it up for me"
+
+然后配置你的频道列表和推送时间。`
+            },
+            {
+                id: 2,
+                title: "Todoist Task Manager",
+                category: "productivity",
+                categoryName: "生产力",
+                icon: "✅",
+                color: "cat-productivity",
+                desc: "将 Agent 的任务状态同步到 Todoist，可视化复杂工作流的进度。",
+                skills: ["Todoist API", "Bash"],
+                painPoint: "执行复杂多步任务时，用户不知道 Agent 正在做什么、完成了哪些步骤。",
+                whatItDoes: [
+                    "在 Todoist 创建任务展示当前状态",
+                    "将 Agent 的计划写入任务描述",
+                    "实时添加子步骤完成日志",
+                    "自动检测卡住的任务并通知用户"
+                ],
+                setup: `创建三个脚本:
+1. todoist_api.sh - Todoist REST API 包装器
+2. sync_task.sh - 任务和状态管理
+3. add_comment.sh - 进度日志
+
+配置 API Token 和项目 ID 即可使用。`
+            },
+            {
+                id: 3,
+                title: "Multi-Channel Assistant",
+                category: "productivity",
+                categoryName: "生产力",
+                icon: "🔀",
+                color: "cat-productivity",
+                desc: "多频道个人助手，整合 Telegram、Slack、Google Workspace、Todoist、Asana。",
+                skills: ["gog CLI", "Slack", "Todoist", "Asana"],
+                painPoint: "在不同应用间切换管理任务、日程和消息很繁琐。",
+                whatItDoes: [
+                    "Telegram 作为主要界面，按主题路由",
+                    "Slack 集成团队协作",
+                    "Google Workspace 管理日历和邮件",
+                    "自动提醒：垃圾日、公司周报等"
+                ],
+                setup: `1. 设置 Telegram 主题：config、updates、video-ideas 等
+2. 连接所有工具：Google OAuth、Slack、Todoist、Asana
+3. 提示 OpenClaw 根据上下文路由请求`
+            },
+            {
+                id: 4,
+                title: "Personal CRM",
+                category: "personal",
+                categoryName: "个人管理",
+                icon: "👥",
+                color: "cat-personal",
+                desc: "自动发现并维护个人 CRM，跟踪联系人和互动历史。",
+                skills: ["gog CLI"],
+                painPoint: "手动记录联系人信息困难，重要的后续跟进容易遗漏。",
+                whatItDoes: [
+                    "每日扫描邮件和日历发现新联系人",
+                    "存储联系人和互动上下文",
+                    "自然语言查询：'Who needs follow-up?'",
+                    "每日会议前提供参与者简报"
+                ],
+                setup: `1. 创建 CRM 数据库 (SQLite)
+2. 设置 Telegram 主题 "personal-crm"
+3. 配置每日 cron 任务扫描和更新`
+            },
+            {
+                id: 5,
+                title: "Knowledge Base (RAG)",
+                category: "personal",
+                categoryName: "个人管理",
+                icon: "🧠",
+                color: "cat-personal",
+                desc: "个人知识库，保存文章、推文、视频内容并支持语义搜索。",
+                skills: ["knowledge-base", "web_fetch"],
+                painPoint: "收藏的内容太多，找不到上周看过的某个资料。",
+                whatItDoes: [
+                    "自动提取 Telegram/Slack 中的 URL 内容",
+                    "语义搜索已保存的内容",
+                    "与其他工作流集成（如视频创意管道）"
+                ],
+                setup: `1. 从 ClawdHub 安装 knowledge-base skill
+2. 创建 Telegram 主题 "knowledge-base"
+3. 配置 URL 摄取和查询规则`
+            },
+            {
+                id: 6,
+                title: "YouTube Content Pipeline",
+                category: "content",
+                categoryName: "内容创作",
+                icon: "🎬",
+                color: "cat-content",
+                desc: "YouTube 内容创作管道，自动发现视频创意并生成研究卡片。",
+                skills: ["web_search", "x-research-v2", "knowledge-base", "Asana"],
+                painPoint: "作为日更创作者，寻找新鲜及时的视频创意耗时费力。",
+                whatItDoes: [
+                    "每小时扫描最新 AI 新闻和 X/Twitter",
+                    "维护 90 天视频目录避免重复",
+                    "存储所有创意到 SQLite 数据库",
+                    "分享链接时自动研究并创建 Asana 卡片"
+                ],
+                setup: `1. 设置 Telegram 主题接收创意
+2. 安装 knowledge-base 和 x-research skill
+3. 创建 pitches 数据库和 Asana 项目`
+            },
+            {
+                id: 7,
+                title: "Health & Symptom Tracker",
+                category: "personal",
+                categoryName: "个人管理",
+                icon: "❤️",
+                color: "cat-personal",
+                desc: "健康症状追踪器，记录饮食和症状并分析潜在触发因素。",
+                skills: ["Cron", "Telegram"],
+                painPoint: "识别食物敏感需要长期记录，手动维护很繁琐。",
+                whatItDoes: [
+                    "在 Telegram 主题记录饮食和症状",
+                    "每日 3 次提醒记录",
+                    "每周分析模式识别潜在触发因素"
+                ],
+                setup: `1. 创建 Telegram 主题 "health-tracker"
+2. 创建日志文件 ~/clawd/memory/health-log.md
+3. 配置每日提醒和分析任务`
+            },
+            {
+                id: 8,
+                title: "X Account Analysis",
+                category: "analysis",
+                categoryName: "数据分析",
+                icon: "🐦",
+                color: "cat-analysis",
+                desc: "X/Twitter 账号分析，深入了解帖子表现和内容质量。",
+                skills: ["Bird"],
+                painPoint: "X 的分析功能只显示数据，不提供定性洞察。",
+                whatItDoes: [
+                    "获取最近 N 条推文",
+                    "分析病毒式传播的模式",
+                    "识别高互动话题",
+                    "对比高赞和低赞帖子的差异"
+                ],
+                setup: `1. 安装 Bird skill (clawhub install bird)
+2. 创建新的 X 账号给 Bot
+3. 配置 auth-token 和 ct0 cookie
+4. 让 AI 分析你的账号表现`
+            },
+            {
+                id: 9,
+                title: "Earnings Tracker",
+                category: "analysis",
+                categoryName: "数据分析",
+                icon: "📈",
+                color: "cat-analysis",
+                desc: "AI 驱动的财报追踪器，监控科技公司财报并生成摘要。",
+                skills: ["web_search", "Cron"],
+                painPoint: "跟踪数十家科技公司财报需要查看多个来源。",
+                whatItDoes: [
+                    "每周日扫描下周财报日历",
+                    "用户选择关注的公司后安排一次性 cron",
+                    "财报发布后搜索并生成详细摘要"
+                ],
+                setup: `1. 创建 Telegram 主题 "earnings"
+2. 配置关注的公司列表 (NVDA, MSFT, GOOGL 等)
+3. 设置每周日和财报日任务`
+            },
+            {
+                id: 10,
+                title: "Daily Reddit Digest",
+                category: "content",
+                categoryName: "内容创作",
+                icon: "🔴",
+                color: "cat-content",
+                desc: "每日 Reddit 摘要，从你关注的 subreddit 获取热门帖子。",
+                skills: ["reddit-readonly"],
+                painPoint: "手动浏览多个 subreddit 获取热门内容很耗时。",
+                whatItDoes: [
+                    "浏览 subreddit (hot/new/top 帖子)",
+                    "按主题搜索帖子",
+                    "拉取评论线程获取上下文",
+                    "生成摘要供后续查看"
+                ],
+                setup: `1. 从 ClawdHub 安装 reddit-readonly skill
+2. 提供你关注的 subreddit 列表
+3. 配置每日定时任务和偏好规则`
+            },
+            {
+                id: 11,
+                title: "Phone-Based Assistant",
+                category: "automation",
+                categoryName: "自动化",
+                icon: "📞",
+                color: "cat-automation",
+                desc: "基于电话的个人助手，通过语音与 AI 交互。",
+                skills: ["ClawdTalk", "Calendar", "Jira"],
+                painPoint: "需要在不开车时使用智能手机应用或浏览器访问 AI。",
+                whatItDoes: [
+                    "拨打号码与 AI 语音对话",
+                    "语音查询日历、Jira、搜索结果",
+                    "通过 Telnyx 实现可靠的电话连接"
+                ],
+                setup: `1. 安装 ClawdTalk
+2. 配置 Telnyx API
+3. 设置 Calendar 和 Jira skill`
+            },
+            {
+                id: 12,
+                title: "Inbox De-clutter",
+                category: "productivity",
+                categoryName: "生产力",
+                icon: "📧",
+                color: "cat-productivity",
+                desc: "收件箱整理，自动汇总新闻邮件并生成摘要。",
+                skills: ["Gmail OAuth"],
+                painPoint: "新闻邮件堆积如山，经常不打开就沉底了。",
+                whatItDoes: [
+                    "每日读取过去 24 小时的新闻邮件",
+                    "生成最重要内容的摘要和链接",
+                    "根据反馈优化摘要质量"
+                ],
+                setup: `1. 从 ClawdHub 安装 Gmail OAuth skill
+2. [可选] 创建专用 Gmail 用于订阅
+3. 配置每日 cron 任务和摘要偏好`
+            },
+            {
+                id: 13,
+                title: "Overnight Mini-App Builder",
+                category: "automation",
+                categoryName: "自动化",
+                icon: "🌙",
+                color: "cat-automation",
+                desc: "夜间迷你应用构建器，让 AI 在你睡觉时构建小型应用。",
+                skills: ["None"],
+                painPoint: "想自动化繁琐工作，但没有时间开发小工具。",
+                whatItDoes: [
+                    "AI 主动理解你的目标和策略",
+                    "夜间自动构建 MVP 应用",
+                    "每天早上有新惊喜"
+                ],
+                setup: `直接告诉 OpenClaw 你的目标：
+"根据我的目标 [描述]，夜间帮我构建一个 MVP 应用，不要过度复杂化。"
+
+每天早上醒来查看新应用！`
+            }
+        ];
+
+        // Render Gallery
+        function renderGallery(filter = 'all') {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            usecases.forEach(usecase => {
+                if (filter !== 'all' && usecase.category !== filter) return;
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openModal(usecase);
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-icon ${usecase.color}">${usecase.icon}</div>
+                        <div class="card-content">
+                            <div class="card-category">${usecase.categoryName}</div>
+                            <div class="card-title">${usecase.title}</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-desc">${usecase.desc}</div>
+                        <div class="card-meta">
+                            ${usecase.skills.map(skill => `<span class="tag skill">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        // Filter Buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderGallery(btn.dataset.filter);
+            });
+        });
+
+        // Modal Functions
+        function openModal(usecase) {
+            document.getElementById('modal-icon').textContent = usecase.icon;
+            document.getElementById('modal-icon').className = 'modal-icon ' + usecase.color;
+            document.getElementById('modal-category').textContent = usecase.categoryName;
+            document.getElementById('modal-title').textContent = usecase.title;
+            
+            document.getElementById('modal-body').innerHTML = `
+                <div class="modal-section">
+                    <h3>💡 痛点</h3>
+                    <p>${usecase.painPoint}</p>
+                </div>
+                <div class="modal-section">
+                    <h3>🎯 功能</h3>
+                    <ul>
+                        ${usecase.whatItDoes.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="modal-section">
+                    <h3>🛠 所需 Skill</h3>
+                    <div class="card-meta">
+                        ${usecase.skills.map(skill => `<span class="tag skill">${skill}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>⚡ 配置方法</h3>
+                    <div class="code-block">${usecase.setup}</div>
+                </div>
+            `;
+            
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') closeModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initial render
+        renderGallery();
+    </script>
+</body>
+</html>

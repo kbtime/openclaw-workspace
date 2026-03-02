@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 使用场景大全</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #000; color: #e5e5e5; }
+        .card {
+            background: linear-gradient(145deg, rgba(23,23,23,0.8) 0%, rgba(10,10,10,0.9) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .category-badge { background: rgba(30,30,30,0.8); border: 1px solid rgba(255,255,255,0.1); }
+        .skill-tag { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; }
+        .nav-blur { backdrop-filter: blur(12px); background: rgba(0,0,0,0.7); }
+        .search-input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        .search-input:focus { border-color: rgba(59, 130, 246, 0.5); outline: none; }
+        .category-btn { background: rgba(30,30,30,0.5); border: 1px solid rgba(255,255,255,0.1); color: #9ca3af; }
+        .category-btn:hover, .category-btn.active { background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.5); color: #60a5fa; }
+        .fade-in { animation: fadeIn 0.5s ease forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">OC</span>
+                    </div>
+                    <span class="text-white font-semibold">OpenClaw Use Cases</span>
+                </div>
+                <a href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank" class="text-gray-400 hover:text-white transition">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                OpenClaw 使用场景大全
+            </h1>
+            <p class="text-lg text-gray-400 mb-8">30 个真实使用场景，帮助你了解 OpenClaw 能做什么</p>
+            
+            <div class="max-w-xl mx-auto mb-8">
+                <input type="text" id="searchInput" placeholder="搜索场景..." class="w-full px-4 py-3 rounded-xl search-input text-white placeholder-gray-500">
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-center">
+                <div class="px-6 py-3 rounded-xl category-badge">
+                    <div class="text-2xl font-bold text-white">30</div>
+                    <div class="text-sm text-gray-400">使用场景</div>
+                </div>
+                <div class="px-6 py-3 rounded-xl category-badge">
+                    <div class="text-2xl font-bold text-white">7</div>
+                    <div class="text-sm text-gray-400">类别</div>
+                </div>
+                <div class="px-6 py-3 rounded-xl category-badge">
+                    <div class="text-2xl font-bold text-white">15+</div>
+                    <div class="text-sm text-gray-400">技能集成</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="px-4 mb-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-wrap justify-center gap-3" id="categoryFilter">
+                <button class="category-btn active px-4 py-2 rounded-lg text-sm font-medium" data-category="all">全部</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="content">📺 内容消费</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="automation">⚡ 自动化</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="infra">🖥️ 基础设施</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="project">📋 项目管理</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="assistant">🤖 个人助理</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="knowledge">🧠 知识管理</button>
+                <button class="category-btn px-4 py-2 rounded-lg text-sm font-medium" data-category="business">💼 商业应用</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Grid -->
+    <section class="px-4 pb-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="useCasesGrid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center text-gray-500 text-sm">
+            <p>数据来源：<a href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank" class="text-blue-400 hover:underline">awesome-openclaw-usecases</a></p>
+            <p class="mt-2">整理：十三香 🌶️ | Powered by OpenClaw</p>
+        </div>
+    </footer>
+
+    <script>
+        const useCases = [
+            // 内容消费
+            { category: 'content', icon: '📺', name: 'Daily Reddit Digest', desc: '每天自动获取指定子版块的热门帖子，根据偏好筛选内容', skills: ['reddit-readonly'] },
+            { category: 'content', icon: '📺', name: 'Daily YouTube Digest', desc: '获取你喜欢的频道最新视频，提取字幕并总结关键内容', skills: ['youtube-full'] },
+            { category: 'content', icon: '📺', name: 'X Account Analysis', desc: '分析你的推文模式和表现，找出什么内容容易爆', skills: ['bird'] },
+            { category: 'content', icon: '📺', name: 'Multi-Source Tech News', desc: '聚合 109+ 来源的科技新闻，自动去重、质量评分', skills: ['tech-news-digest', 'gog'] },
+            // 自动化
+            { category: 'automation', icon: '⚡', name: 'Goal-Driven Tasks', desc: '倾倒目标，Agent 自动生成每日任务并执行，包括构建小程序', skills: ['sessions_spawn', 'Telegram'] },
+            { category: 'automation', icon: '⚡', name: 'YouTube Content Pipeline', desc: '每小时扫描 AI 新闻推送选题，维护 90 天视频目录避免重复', skills: ['web_search', 'knowledge-base'] },
+            { category: 'automation', icon: '⚡', name: 'Multi-Agent Content Factory', desc: '研究Agent + 写作Agent + 缩略图Agent，在 Discord 自动协作', skills: ['Discord', 'sessions_spawn'] },
+            { category: 'automation', icon: '⚡', name: 'Autonomous Game Dev', desc: '全自动游戏开发生命周期，每 7 分钟产出一个新游戏', skills: ['文件系统', 'Git'] },
+            // 基础设施
+            { category: 'infra', icon: '🖥️', name: 'n8n Workflow', desc: '通过 webhook 调用 n8n，API 密钥隔离，工作流可视化', skills: ['n8n API', 'fetch'] },
+            { category: 'infra', icon: '🖥️', name: 'Self-Healing Server', desc: '自动健康监控、自愈能力、基础设施管理、安全审计', skills: ['SSH', 'kubectl', 'terraform'] },
+            // 项目管理
+            { category: 'project', icon: '📋', name: 'Autonomous Project Mgmt', desc: '去中心化协调，Agent 读/写共享 STATE.yaml，多 Agent 并行', skills: ['sessions_spawn'] },
+            { category: 'project', icon: '📋', name: 'Project State Mgmt', desc: '事件驱动更新，自然语言查询，每日站会摘要', skills: ['postgres', 'github'] },
+            { category: 'project', icon: '📋', name: 'Dynamic Dashboard', desc: '多数据源并行监控，子 Agent 避免阻塞，自动更新', skills: ['postgres', 'Discord'] },
+            { category: 'project', icon: '📋', name: 'Todoist Task Manager', desc: '在 Todoist 创建任务显示状态，实时添加子步骤日志', skills: ['Todoist API'] },
+            // 个人助理
+            { category: 'assistant', icon: '🤖', name: 'Custom Morning Brief', desc: '每天固定时间发送定制早报：新闻、任务、创意输出', skills: ['Telegram', 'Cron'] },
+            { category: 'assistant', icon: '🤖', name: 'Multi-Channel Assistant', desc: 'Telegram 为主界面按主题路由，Slack + Google Workspace', skills: ['gog', 'Slack', 'Todoist'] },
+            { category: 'assistant', icon: '🤖', name: 'Phone-Based Assistant', desc: '拨打号码与 AI 语音对话，获取日历、Jira、搜索结果', skills: ['ClawdTalk', 'Twilio'] },
+            { category: 'assistant', icon: '🤖', name: 'Inbox De-clutter', desc: '每天读取通讯邮件，提取重要内容生成摘要', skills: ['Gmail OAuth'] },
+            { category: 'assistant', icon: '🤖', name: 'Personal CRM', desc: '每日扫描邮件日历发现联系人，会议准备简报', skills: ['gog', 'SQLite'] },
+            { category: 'assistant', icon: '🤖', name: 'Health & Symptom Tracker', desc: '发送食物和症状自动记录，分析模式识别触发因素', skills: ['Telegram', 'Cron'] },
+            { category: 'assistant', icon: '🤖', name: 'Family Calendar', desc: '聚合家庭日历到早报，监控消息自动创建事件', skills: ['Google Calendar', 'iMessage'] },
+            { category: 'assistant', icon: '🤖', name: 'Multi-Agent Team', desc: '多个专业化 Agent 各有角色，单一 Telegram 群聊控制', skills: ['sessions_spawn', 'Telegram'] },
+            // 知识管理
+            { category: 'knowledge', icon: '🧠', name: 'Second Brain', desc: '发送任何内容立即记住，Next.js 仪表盘搜索', skills: ['Telegram', 'Next.js'] },
+            { category: 'knowledge', icon: '🧠', name: 'Personal Knowledge Base', desc: '丢入 URL 自动摄入，语义搜索，为其他工作流提供研究支持', skills: ['knowledge-base', 'web_fetch'] },
+            { category: 'knowledge', icon: '🧠', name: 'Semantic Memory Search', desc: 'Markdown 记忆索引到向量数据库，语义搜索', skills: ['memsearch', 'Milvus'] },
+            // 商业应用
+            { category: 'business', icon: '💼', name: 'Multi-Channel Customer Service', desc: '统一收件箱，AI 自动回复，响应时间从 4h 降到 2min', skills: ['WhatsApp', 'Instagram', 'Gmail'] },
+            { category: 'business', icon: '💼', name: 'Market Research & Product', desc: '挖掘 Reddit 和 X 的真实痛点，发现产品机会构建 MVP', skills: ['last-30-days'] },
+            { category: 'business', icon: '💼', name: 'AI Earnings Tracker', desc: '跟踪科技财报日历，自动搜索结果生成摘要', skills: ['web_search', 'Telegram'] },
+            { category: 'business', icon: '💼', name: 'Event Guest Confirmation', desc: 'AI 自动拨打客人电话确认出席并收集备注', skills: ['SuperCall', 'Twilio'] },
+            { category: 'business', icon: '💼', name: 'Polymarket Autopilot', desc: '自动化模拟交易，追踪投资组合表现', skills: ['web_search', 'postgres', 'Discord'] }
+        ];
+
+        const categoryColors = {
+            content: 'bg-blue-500/20 text-blue-400',
+            automation: 'bg-yellow-500/20 text-yellow-400',
+            infra: 'bg-green-500/20 text-green-400',
+            project: 'bg-purple-500/20 text-purple-400',
+            assistant: 'bg-pink-500/20 text-pink-400',
+            knowledge: 'bg-cyan-500/20 text-cyan-400',
+            business: 'bg-orange-500/20 text-orange-400'
+        };
+
+        function renderCards(cases) {
+            const grid = document.getElementById('useCasesGrid');
+            grid.innerHTML = cases.map((uc, i) => `
+                <div class="card rounded-2xl p-6 fade-in" style="animation-delay: ${i * 50}ms">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="text-2xl">${uc.icon}</span>
+                        <span class="px-2 py-1 text-xs rounded-full ${categoryColors[uc.category]}">${uc.category === 'content' ? '内容消费' : uc.category === 'automation' ? '自动化' : uc.category === 'infra' ? '基础设施' : uc.category === 'project' ? '项目管理' : uc.category === 'assistant' ? '个人助理' : uc.category === 'knowledge' ? '知识管理' : '商业应用'}</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">${uc.name}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${uc.desc}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${uc.skills.map(s => `<span class="skill-tag px-2 py-1 text-xs rounded">${s}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial render
+        renderCards(useCases);
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = useCases.filter(uc => 
+                uc.name.toLowerCase().includes(query) || uc.desc.toLowerCase().includes(query)
+            );
+            renderCards(filtered);
+        });
+
+        // Category filter
+        document.getElementById('categoryFilter').addEventListener('click', (e) => {
+            if (e.target.classList.contains('category-btn')) {
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                const category = e.target.dataset.category;
+                const filtered = category === 'all' ? useCases : useCases.filter(uc => uc.category === category);
+                renderCards(filtered);
+            }
+        });
+    </script>
+</body>
+</html>

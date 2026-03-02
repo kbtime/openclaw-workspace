@@ -1,0 +1,22 @@
+{
+  "name": "tavily-search",
+  "version": "1.0.0",
+  "description": "Tavily AI Web Search skill for OpenClaw",
+  "main": "scripts/search.js",
+  "scripts": {
+    "search": "node scripts/search.js"
+  },
+  "keywords": [
+    "tavily",
+    "search",
+    "web-search",
+    "ai",
+    "openclaw-skill"
+  ],
+  "author": "arun-8687",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://clawhub.ai/arun-8687/tavily-search"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background:#0a0a0a;color:white;display:flex;align-items:center;justify-content:center;min-height:100vh">
+    <div style="max-width:400px;padding:2rem;background:#18181b;border-radius:1rem;border:1px solid #27272a">
+        <h1 style="font-size:1.5rem;font-weight:bold;margin-bottom:1.5rem;text-align:center">服务器导航</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="用户名" required style="width:100%;padding:0.75rem;margin-bottom:1rem;background:#27272a;border:1px solid #3f3f46;border-radius:0.5rem;color:white">
+            <input type="password" id="password" placeholder="密码" required style="width:100%;padding:0.75rem;margin-bottom:1rem;background:#27272a;border:1px solid #3f3f46;border-radius:0.5rem;color:white">
+            <button type="submit" style="width:100%;padding:0.75rem;background:#2563eb;color:white;border-radius:0.5rem;font-weight:600">登录</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const res = await fetch('/wb/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username:u, password:p})
+            });
+            const data = await res.json();
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.username);
+                window.location.href = '/wb/';
+            } else {
+                alert('错误');
+            }
+        });
+    </script>
+</body>
+</html>

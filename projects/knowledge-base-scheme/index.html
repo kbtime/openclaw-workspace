@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库方案 - 本地 RAG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #0a0a0a; }
+        .card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="border-b border-zinc-800 bg-zinc-900/50 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <h1 class="text-xl font-bold text-white">🧠 本地 RAG 知识库方案</h1>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+        <!-- 架构 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">📐 系统架构</h2>
+            <div class="bg-zinc-900 rounded-2xl p-8 border border-zinc-800">
+                <svg viewBox="0 0 600 280" class="w-full h-auto">
+                    <rect x="30" y="80" width="100" height="60" rx="10" fill="#3b82f6" opacity="0.2" stroke="#3b82f6"/>
+                    <text x="80" y="115" text-anchor="middle" fill="white" font-size="14">用户问题</text>
+                    <rect x="180" y="80" width="100" height="60" rx="10" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6"/>
+                    <text x="230" y="115" text-anchor="middle" fill="white" font-size="14">主 Agent</text>
+                    <rect x="330" y="80" width="100" height="60" rx="10" fill="#10b981" opacity="0.2" stroke="#10b981"/>
+                    <text x="380" y="115" text-anchor="middle" fill="white" font-size="14">子 Agent</text>
+                    <rect x="180" y="180" width="120" height="60" rx="10" fill="#f59e0b" opacity="0.2" stroke="#f59e0b"/>
+                    <text x="240" y="215" text-anchor="middle" fill="white" font-size="14">向量服务</text>
+                    <rect x="330" y="180" width="100" height="60" rx="10" fill="#ec4899" opacity="0.2" stroke="#ec4899"/>
+                    <text x="380" y="215" text-anchor="middle" fill="white" font-size="14">知识库</text>
+                    <path d="M130 110 L180 110" stroke="#6b7280" stroke-width="2"/>
+                    <path d="M280 110 L330 110" stroke="#6b7280" stroke-width="2"/>
+                    <path d="M230 140 L230 180" stroke="#6b7280" stroke-width="2"/>
+                    <path d="M380 140 L380 180" stroke="#6b7280" stroke-width="2"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- 使用流程 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">🔄 使用流程</h2>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center font-bold">1</div>
+                    <div class="flex-1 bg-zinc-800 rounded-lg p-4">
+                        <p class="text-white"><span class="text-blue-400 font-semibold">用户提问</span> - "年假有多少天？"</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-purple-500/20 text-purple-400 rounded-full flex items-center justify-center font-bold">2</div>
+                    <div class="flex-1 bg-zinc-800 rounded-lg p-4">
+                        <p class="text-white"><span class="text-purple-400 font-semibold">主 Agent</span> - 理解问题，调用子 Agent</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center font-bold">3</div>
+                    <div class="flex-1 bg-zinc-800 rounded-lg p-4">
+                        <p class="text-white"><span class="text-green-400 font-semibold">子 Agent</span> - 向量化问题 → 向量库检索</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-yellow-500/20 text-yellow-400 rounded-full flex items-center justify-center font-bold">4</div>
+                    <div class="flex-1 bg-zinc-800 rounded-lg p-4">
+                        <p class="text-white"><span class="text-yellow-400 font-semibold">检索</span> - 相似度匹配 → Rerank 排序 → 返回 Top-K</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-pink-500/20 text-pink-400 rounded-full flex items-center justify-center font-bold">5</div>
+                    <div class="flex-1 bg-zinc-800 rounded-lg p-4">
+                        <p class="text-white"><span class="text-pink-400 font-semibold">生成</span> - 结合上下文生成回答</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Git 管理流程 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">🔧 知识库管理流程（Git）</h2>
+            <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 mb-6">
+                <p class="text-zinc-400 mb-4">知识库使用 Git 管理，支持版本控制和团队协作</p>
+                <pre class="text-green-400 text-sm"># 1. 克隆知识库
+git clone https://github.com/xxx/knowledge-base.git
+cd knowledge-base
+
+# 2. 添加/修改文档
+vim policies/请假制度.md
+
+# 3. 提交更改
+git add .
+git commit -m "更新请假制度"
+
+# 4. 推送到远程
+git push origin main</pre>
+            </div>
+        </section>
+
+        <!-- 演示场景 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">🎬 演示场景</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+                    <h3 class="text-lg font-semibold text-white mb-4">📋 制度查询</h3>
+                    <div class="bg-zinc-800 rounded-lg p-4 mb-4">
+                        <p class="text-zinc-400 text-sm">Q: 年假有多少天？</p>
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg p-4">
+                        <p class="text-green-400 text-sm">A: 根据公司请假制度，工作满1年5天，满3年10天...</p>
+                    </div>
+                </div>
+                <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+                    <h3 class="text-lg font-semibold text-white mb-4">📝 合同审核</h3>
+                    <div class="bg-zinc-800 rounded-lg p-4 mb-4">
+                        <p class="text-zinc-400 text-sm">Q: 这份合同合规吗？</p>
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg p-4">
+                        <p class="text-yellow-400 text-sm">⚠️ 发现问题：试用期限超6个月（违法）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心组件 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">📦 核心组件</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+                    <h3 class="text-lg font-semibold text-white mb-2">🔍 向量检索</h3>
+                    <ul class="text-zinc-400 text-sm space-y-2">
+                        <li>• 嵌入模型：Qwen3-Embedding-8B</li>
+                        <li>• 重排序：Qwen3-Reranker-8B</li>
+                    </ul>
+                </div>
+                <div class="bg-zinc-900 rounded-2xl p-6 border border-zinc-800">
+                    <h3 class="text-lg font-semibold text-white mb-2">🤖 子 Agent</h3>
+                    <ul class="text-zinc-400 text-sm space-y-2">
+                        <li>• 模型：qwen3.5-flash</li>
+                        <li>• 降低主 Agent 算力消耗</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特点 -->
+        <section>
+            <h2 class="text-2xl font-bold text-white mb-6">✨ 功能特点</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                    <h4 class="font-semibold text-white mb-2">✅ 向量检索</h4>
+                    <p class="text-zinc-400 text-sm">语义相似度搜索</p>
+                </div>
+                <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                    <h4 class="font-semibold text-white mb-2">✅ 重排序</h4>
+                    <p class="text-zinc-400 text-sm">Reranker 优化结果</p>
+                </div>
+                <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+                    <h4 class="font-semibold text-white mb-2">✅ 增量索引</h4>
+                    <p class="text-zinc-400 text-sm">只更新修改的文档</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

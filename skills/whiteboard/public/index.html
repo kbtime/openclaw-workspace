@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>服务器导航</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background:#0a0a0a;color:white">
+    <nav style="border-bottom:1px solid #27272a;padding:1rem">
+        <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-weight:bold">🖥️ 服务器导航</span>
+            <button onclick="logout()" style="padding:0.5rem 1rem;background:#27272a;border-radius:0.5rem">退出</button>
+        </div>
+    </nav>
+    <main style="max-width:1200px;margin:0 auto;padding:2rem">
+        <h2 style="font-size:1.25rem;margin-bottom:1rem">可用服务</h2>
+        <div id="services" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem"></div>
+    </main>
+    <script>
+        async function init() {
+            const token = localStorage.getItem('token');
+            if (!token) { window.location.href = '/wb/login.html'; return; }
+            const res = await fetch('/wb/api/auth/verify', {headers: {'Authorization': 'Bearer ' + token}});
+            if (res.status !== 200) { logout(); return; }
+            loadServices();
+        }
+        async function loadServices() {
+            const token = localStorage.getItem('token');
+            const res = await fetch('/wb/api/services', {headers: {'Authorization': 'Bearer ' + token}});
+            if (res.status !== 200) { logout(); return; }
+            const data = await res.json();
+            document.getElementById('services').innerHTML = data.map(s => 
+                '<a href="'+s.url+'" target="_blank" style="display:block;padding:1.5rem;background:#18181b;border:1px solid #27272a;border-radius:1rem;transition:0.2s">'+
+                '<div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><span>'+s.name+'</span><span style="color:#22c55e;font-size:0.75rem">在线</span></div>'+
+                '<p style="color:#a1a1aa;font-size:0.875rem">'+s.description+'</p></a>'
+            ).join('');
+        }
+        function logout() {
+            localStorage.clear();
+            window.location.href = '/wb/login.html';
+        }
+        init();
+    </script>
+</body>
+</html>

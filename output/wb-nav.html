@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器导航 - x.738402.xyz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #0a0a0a; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="border-b border-zinc-800 bg-zinc-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <span class="text-lg">🖥️</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white">服务器导航</h1>
+                    <p class="text-xs text-zinc-500">x.738402.xyz</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-zinc-400 text-sm">欢迎, lhong</span>
+                <button class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-sm rounded-lg transition">退出登录</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-8">
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-white mb-2">可用服务</h2>
+            <p class="text-zinc-400 text-sm">自动发现 Nginx 已配置的服务</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 服务卡片 1 -->
+            <a href="/dashboard/" target="_blank" class="card block p-6 bg-zinc-900/60 backdrop-blur rounded-2xl border border-zinc-800 transition-all duration-300">
+                <div class="flex items-start justify-between mb-4">
+                    <span class="text-2xl">📊</span>
+                    <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs rounded-full">在线</span>
+                </div>
+                <h3 class="text-base font-semibold text-white mb-2">Task Dashboard</h3>
+                <p class="text-zinc-400 text-sm mb-3">任务看板 - 查看定时任务执行状态</p>
+                <span class="text-blue-400 text-sm font-mono">/dashboard/</span>
+            </a>
+
+            <!-- 服务卡片 2 -->
+            <a href="/usecases/" target="_blank" class="card block p-6 bg-zinc-900/60 backdrop-blur rounded-2xl border border-zinc-800 transition-all duration-300">
+                <div class="flex items-start justify-between mb-4">
+                    <span class="text-2xl">📚</span>
+                    <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs rounded-full">在线</span>
+                </div>
+                <h3 class="text-base font-semibold text-white mb-2">OpenClaw 使用场景</h3>
+                <p class="text-zinc-400 text-sm mb-3">30个使用场景展示</p>
+                <span class="text-blue-400 text-sm font-mono">/usecases/</span>
+            </a>
+
+            <!-- 服务卡片 3 -->
+            <a href="/wb/" target="_blank" class="card block p-6 bg-zinc-900/60 backdrop-blur rounded-2xl border border-zinc-800 transition-all duration-300">
+                <div class="flex items-start justify-between mb-4">
+                    <span class="text-2xl">🖥️</span>
+                    <span class="px-2.5 py-1 bg-green-500/10 text-green-400 text-xs rounded-full">在线</span>
+                </div>
+                <h3 class="text-base font-semibold text-white mb-2">服务器导航</h3>
+                <p class="text-zinc-400 text-sm mb-3">本页面 - 服务导航入口</p>
+                <span class="text-blue-400 text-sm font-mono">/wb/</span>
+            </a>
+        </div>
+
+        <div class="mt-12 p-6 bg-zinc-900/40 rounded-2xl border border-zinc-800">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-base font-semibold text-white">🔄 自动刷新</h3>
+                <span class="text-zinc-500 text-sm">每 30 秒刷新</span>
+            </div>
+            <p class="text-zinc-400 text-sm">服务列表每 30 秒自动从 Nginx 配置中重新加载，新配置会自动显示</p>
+        </div>
+    </main>
+</body>
+</html>

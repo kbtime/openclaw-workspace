@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千问3.5 (Qwemax3.5) - 最新内容</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7, #f107a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #8892b0;
+            font-weight: 300;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        .card p {
+            color: #a0aec0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #cbd5e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: #00d4ff;
+            font-weight: bold;
+        }
+        
+        .model-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .model-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #00d4ff;
+        }
+        
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .model-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .model-card h4 {
+            color: #f107a3;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .model-card p {
+            color: #8892b0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #f107a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            color: #8892b0;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+        
+        .timeline {
+            margin-top: 40px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-left: 2px solid rgba(0, 212, 255, 0.3);
+            padding-left: 30px;
+            margin-left: 20px;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            background: #00d4ff;
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            color: #00d4ff;
+            font-weight: 500;
+            min-width: 80px;
+        }
+        
+        .timeline-content {
+            color: #a0aec0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>千问 3.5</h1>
+            <p class="subtitle">Qwemax3.5 - 阿里云通义千问系列</p>
+            <span class="badge">🚀 最新版本 2026</span>
+        </header>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">200亿+</div>
+                <div class="stat-label">参数规模</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">开源模型</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">全球</div>
+                <div class="stat-label">开源霸榜</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>千问3.5-视觉语言大模型</h3>
+                <p>千问首个原生多模态大模型，采用统一架构深度融合语言推理与视觉感知能力，图文生产力实现倍增。</p>
+                <ul class="feature-list">
+                    <li>多模态理解</li>
+                    <li>视觉推理</li>
+                    <li>图像描述生成</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>千问-图片生成大模型</h3>
+                <p>千问系列首个图像生成模型，参数规模200亿。具备卓越的复杂文本渲染能力。</p>
+                <ul class="feature-list">
+                    <li>文本渲染能力强</li>
+                    <li>复杂图像生成</li>
+                    <li>图像编辑能力</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">👁️</div>
+                <h3>千问-视觉理解大模型</h3>
+                <p>更好的视觉推理和指令遵循能力，提供更高的视觉感知和认知水平。</p>
+                <ul class="feature-list">
+                    <li>数学编程分析</li>
+                    <li>视觉分析</li>
+                    <li>指令遵循</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎬</div>
+                <h3>万相2.6-视频生成大模型</h3>
+                <p>支持一句话生成视频，或根据提供首帧或首尾帧图片，生成丝滑流畅的动态视频。</p>
+                <ul class="feature-list">
+                    <li>文字转视频</li>
+                    <li>首帧图片生成</li>
+                    <li>影视级画质</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="model-section">
+            <h2>🏆 模型优势</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>性能效果更优</h3>
+                    <p>首批通过国内"大模型预训练模型测试"，符合国家标准要求。开源社区持续霸榜，极强中文大模型。</p>
+                </div>
+                <div class="card">
+                    <h3>快速响应</h3>
+                    <p>降低交互延迟，高吞吐量，支持多任务并行处理。</p>
+                </div>
+                <div class="card">
+                    <h3>业务适配性高</h3>
+                    <p>提供语言、语音、视觉等多模态模型，支持按需切换不同版本的主流模型API。</p>
+                </div>
+                <div class="card">
+                    <h3>数据安全可靠</h3>
+                    <p>国内首批通过网信办大模型备案，采用先进的加密技术和安全协议。</p>
+                </div>
+                <div class="card">
+                    <h3>成本可控</h3>
+                    <p>提供灵活的计费模式，按需付费，高性能的模型减少计算资源消耗。</p>
+                </div>
+                <div class="card">
+                    <h3>安全合规</h3>
+                    <p>通过ISO42001人工智能管理体系认证，全方位多层次安全防护。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="model-section">
+            <h2>📅 发展历程</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2024</span>
+                    <span class="timeline-content">千问3.5发布，首个原生多模态大模型</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2025</span>
+                    <span class="timeline-content">开源社区持续霸榜，全球开发者广泛使用</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2026</span>
+                    <span class="timeline-content">千问3.5-Plus发布，混合架构双创新突破</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="model-section">
+            <h2>💼 落地场景</h2>
+            <div class="model-grid">
+                <div class="model-card">
+                    <h4>🤖 AI 新春营销</h4>
+                    <p>输入文字或图片即可生成富有创意且符合新年节日氛围的拜年祝福或视频。</p>
+                </div>
+                <div class="model-card">
+                    <h4>🎬 AI 短剧创作</h4>
+                    <p>一键生成创意短剧，智能剪辑配音，快速完成短视频创作。</p>
+                </div>
+                <div class="model-card">
+                    <h4>🛒 AI 电商营销</h4>
+                    <p>智能生成商品文案、主图设计、推广海报，提升电商运营效率。</p>
+                </div>
+                <div class="model-card">
+                    <h4>💼 AI 智能办公</h4>
+                    <p>文档生成、会议纪要、PPT制作，全面提升办公效率。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>🚀 立即体验千问3.5</h2>
+            <p style="color: #8892b0; margin-top: 15px;">通过阿里云百炼调用千问大模型的推理服务</p>
+            <a href="https://www.aliyun.com/product/tongyi" target="_blank" class="cta-button">开始使用 →</a>
+        </div>
+        
+        <footer>
+            <p>© 2026 千问3.5可视化页面 | 数据来源：阿里云官方</p>
+            <p style="margin-top: 10px; color: #666;">Powered by OpenClaw</p>
+        </footer>
+    </div>
+</body>
+</html>

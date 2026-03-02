@@ -1,0 +1,21 @@
+{
+  "accentColor": "#6366f1",
+  "baseFontSize": 16,
+  "cssTheme": "",
+  "interfaceFontFamily": "",
+  "textFontFamily": "",
+  "monospaceFontFamily": "",
+  "enabledPlugins": [],
+  "hotkeys": {},
+  "attachmentFolderPath": "attachments",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "",
+  "newLinkFormat": "shortest",
+  "useMarkdownLinks": false,
+  "showUnsupportedFiles": false,
+  "showInlineTitle": true,
+  "readableLineLength": true,
+  "strictLineBreaks": false,
+  "tabSize": 2,
+  "propertiesInDocument": "visible"
+}

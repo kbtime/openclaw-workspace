@@ -1,0 +1,25 @@
+{
+  "name": "summarize",
+  "version": "1.0.0",
+  "description": "Text summarization skill for OpenClaw",
+  "main": "scripts/summarize.js",
+  "scripts": {
+    "summarize": "node scripts/summarize.js"
+  },
+  "bin": {
+    "summarize": "./scripts/summarize.js"
+  },
+  "keywords": [
+    "summarize",
+    "summary",
+    "text-processing",
+    "ai",
+    "openclaw-skill"
+  ],
+  "author": "steipete",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://clawhub.ai/steipete/summarize"
+  }
+}

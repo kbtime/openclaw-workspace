@@ -1,0 +1,12 @@
+{
+  "name": "mcp-bridge",
+  "version": "1.0.0",
+  "description": "MCP Bridge skill for OpenClaw",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["mcp", "openclaw", "skill"],
+  "author": "FF",
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway integration tool for OpenClaw",
+  "main": "scripts/gateway.js",
+  "scripts": {
+    "request": "node scripts/gateway.js"
+  },
+  "keywords": [
+    "api",
+    "gateway",
+    "rest",
+    "http",
+    "openclaw-skill"
+  ],
+  "author": "byungkyu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://clawhub.ai/byungkyu/api-gateway"
+  }
+}

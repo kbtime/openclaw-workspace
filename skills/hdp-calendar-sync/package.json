@@ -1,0 +1,22 @@
+{
+  "name": "hdp-calendar-sync",
+  "version": "1.0.0",
+  "description": "Sync HDP course schedules to Feishu calendar automatically",
+  "main": "scripts/sync.js",
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "test": "node scripts/sync.js"
+  },
+  "keywords": [
+    "hdp",
+    "calendar",
+    "feishu",
+    "sync",
+    "openclaw-skill"
+  ],
+  "author": "贰号",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}

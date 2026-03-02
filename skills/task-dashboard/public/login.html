@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - Task Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>🤖 Task Dashboard</h1>
+            <p class="subtitle">OpenClaw 任务看板</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+
+                <div class="form-error" id="errorMessage"></div>
+
+                <button type="submit" class="btn-primary">登 录</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = '/api';
+
+        // 检查是否已登录
+        const token = localStorage.getItem('token');
+        if (token) {
+            fetch(`${API_BASE}/auth/me`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(res => res.ok ? window.location.href = '/dashboard' : localStorage.removeItem('token'))
+            .catch(() => localStorage.removeItem('token'));
+        }
+
+        // 登录表单
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorEl = document.getElementById('errorMessage');
+
+            errorEl.textContent = '';
+
+            try {
+                const res = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = '/dashboard';
+                } else {
+                    errorEl.textContent = data.error || '登录失败';
+                }
+            } catch (err) {
+                errorEl.textContent = '网络错误，请重试';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "openclaw-usecases-gallery",
+  "version": "1.0.0",
+  "description": "OpenClaw AI Agent 使用案例可视化画廊",
+  "author": "FF (Auto-generated)",
+  "source": "https://github.com/hesamsheikh/awesome-openclaw-usecases",
+  "installPath": "/root/.openclaw/workspace/skills/openclaw-usecases-gallery",
+  "domain": "moai.g110.top/usecases/"
+}

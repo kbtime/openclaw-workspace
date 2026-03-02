@@ -1,0 +1,7 @@
+{
+  "name": "liwu-forum-api",
+  "version": "1.0.0",
+  "description": "Liwu Forum (253874.net) Bot API - 注册/登录/发帖/回复",
+  "author": "Boss",
+  "base_url": "https://www.253874.net"
+}

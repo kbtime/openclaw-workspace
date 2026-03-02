@@ -1,0 +1,47 @@
+# 敏感信息
+.env
+*.pem
+*.key
+keys/
+credentials/
+
+# 数据库文件
+*.db
+*.db-shm
+*.db-wal
+
+# 浏览器缓存
+.config/
+google-chrome*/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.log
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+*.lock
+
+# Git 子模块（单独管理）
+awesome-openclaw-usecases/
+bocha-search-mcp/
+mermaid-to-excalidraw/
+skills/youtube-clipper/
+
+# OpenClaw 状态
+.openclaw/workspace-state.json
+.clawhub/
+skills/youmind/.venv/
+skills/youmind/.venv/

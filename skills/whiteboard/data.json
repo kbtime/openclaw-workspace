@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "lhong",
+      "password": "$2a$10$rVYJvJZz8h1N7YxQxH9YUeW8Z9Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0Z0"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "📊 Task Dashboard",
+      "url": "/dashboard/",
+      "description": "任务看板 - 查看定时任务执行状态"
+    },
+    {
+      "id": 2,
+      "name": "📚 OpenClaw 使用场景",
+      "url": "/usecases/",
+      "description": "OpenClaw 30个使用场景展示"
+    }
+  ]
+}
